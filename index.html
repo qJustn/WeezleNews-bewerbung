@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bewerbung als Reporter | Jeff Jeremain</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #d32f2f;
+            --dark-red: #9a0007;
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #f5f5f5;
+            --text-muted: #b0bec5;
+            --accent-gold: #ffb300;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* Header / Banner */
+        header {
+            background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "WEAZEL NEWS";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            font-weight: 900;
+            opacity: 0.08;
+            white-space: nowrap;
+            letter-spacing: 5px;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            border-top: 4px solid var(--primary-red);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--primary-red);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        /* Profile & ID Section */
+        .id-card-container {
+            text-align: center;
+        }
+
+        .id-image {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 10px;
+            border: 2px solid #333;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .id-image:hover {
+            transform: scale(1.02);
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .info-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-list li span.label {
+            color: var(--text-muted);
+        }
+
+        .info-list li span.value {
+            font-weight: bold;
+        }
+
+        /* Skills & Content */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .skill-box {
+            background-color: #252525;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .skill-box h4 {
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .skill-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .motto {
+            font-style: italic;
+            background: #252525;
+            padding: 15px;
+            border-left: 4px solid var(--primary-red);
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+        }
+
+        /* Requirements Checklist */
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .check-list i {
+            color: #4caf50;
+            margin-top: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <span class="badge"><i class="fa-solid fa-newspaper"></i> Offizielle Bewerbung</span>
+            <h1>Jeff Jeremain</h1>
+            <p class="subtitle">Bewerbung um eine Anstellung als Reporter bei Weazel News</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            
+            <!-- Linke Spalte: Perso & Kontaktdaten -->
+            <div class="sidebar">
+                <div class="card id-card-container">
+                    <div class="card-title">
+                        <i class="fa-solid fa-address-card"></i> Personalausweis
+                    </div>
+                    <!-- Hier wird das Bild vom Personalausweis geladen -->
+                    <img src="perso.png" alt="Personalausweis Jeff Jeremain" class="id-image">
+                    
+                    <ul class="info-list">
+                        <li><span class="label">Name:</span> <span class="value">Jeff Jeremain</span></li>
+                        <li><span class="label">Alter:</span> <span class="value">36 Jahre</span></li>
+                        <li><span class="label">Visumstufe:</span> <span class="value">30</span></li>
+                        <li><span class="label">Ausweis-Nr.:</span> <span class="value">RR#62863358</span></li>
+                        <li><span class="label">Telefon:</span> <span class="value">6029103965</span></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-headset"></i> Technische Ausstattung
+                    </div>
+                    <ul class="check-list">
+                        <li><i class="fa-solid fa-circle-check"></i> <span>Gute Mikrofon-Qualität für saubere Interviews und Audioaufnahmen vorhanden.</span></li>
+                        <li><i class="fa-solid fa-circle-check"></i> <span>Hohe Aktivität & Präsenz im Stadtleben.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Rechte Spalte: Anschreiben & Qualifikationen -->
+            <div class="main-content">
+                
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-pen-nib"></i> Über mich & Motivation
+                    </div>
+                    <p>Sehr geehrtes Weazel News Team,</p>
+                    <p style="margin-top: 10px;">
+                        mit großer Begeisterung Verfolge ich die Berichterstattung und Events im Stadtleben. Als engagierter Bürger mit Visumstufe 30 bringt mich der Wunsch angetrieben, Geschichten zu erzählen, Bürger zu informieren und aktuelle Geschehnisse hautnah und sauber aufzubereiten.
+                    </p>
+                    
+                    <div class="motto">
+                        "Medienarbeit bedeutet für mich nicht nur Nachrichten zu verbreiten, sondern das Stadtleben aktiv mitzugestalten und den Bürgern eine Stimme zu geben."
+                    </div>
+
+                    <p>
+                        Egal ob spannende Reportagen, spontane Interviews vor Ort oder die Ankündigung großer Events – ich zeichne mich durch mein freundliches, professionelles Auftreten sowie meine Zuverlässigkeit und Teamfähigkeit aus.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-star"></i> Stärken & Fähigkeiten
+                    </div>
+                    <div class="skill-grid">
+                        <div class="skill-box">
+                            <h4><i class="fa-solid fa-microphone"></i> Kommunikation</h4>
+                            <p>Keine Scheu vor öffentlichen Auftritten, spontanen Interviews oder Gesprächen mit Organisationen.</p>
+                        </div>
+                        <div class="skill-box">
+                            <h4><i class="fa-solid fa-file-pen"></i> Ausdrucksweise</h4>
+                            <p>Sicheres Schreiben, gute Rechtschreibung und die Fähigkeit, Infos schnell und sauber zu strukturieren.</p>
+                        </div>
+                        <div class="skill-box">
+                            <h4><i class="fa-solid fa-lightbulb"></i> Kreativität</h4>
+                            <p>Ideenreich bei der Erstellung von Berichten, Beiträgen und der Begleitung von Stadt-Events.</p>
+                        </div>
+                        <div class="skill-box">
+                            <h4><i class="fa-solid fa-users"></i> Teamgeist</h4>
+                            <p>Zuverlässig, motiviert und stets bereit, Neues zu lernen und das Team bestmöglich zu unterstützen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-clipboard-check"></i> Erfüllte Voraussetzungen
+                    </div>
+                    <ul class="check-list">
+                        <li><i class="fa-solid fa-check"></i> <span>Aktivität im Stadtleben & Hohe Einsatzbereitschaft</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span>Freundliches & professionelles Auftreten gegenüber Bürgern</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span>Gute Rechtschreibung & lückenlose Aufbereitung von Berichten</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span>Hohe Motivation & Lernbereitschaft</span></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; Bewerbung von Jeff Jeremain | Weazel News – San Andreas</p>
+    </footer>
+
+</body>
+</html>
