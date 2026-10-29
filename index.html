@@ -3,332 +3,762 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bewerbung als Reporter | Jeff Jeremain</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-red: #d32f2f;
-            --dark-red: #9a0007;
-            --bg-dark: #121212;
-            --card-bg: #1e1e1e;
-            --text-light: #f5f5f5;
-            --text-muted: #b0bec5;
-            --accent-gold: #ffb300;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            padding-bottom: 50px;
-        }
-
-        /* Header / Banner */
-        header {
-            background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: "WEAZEL NEWS";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 5rem;
-            font-weight: 900;
-            opacity: 0.08;
-            white-space: nowrap;
-            letter-spacing: 5px;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .badge {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        p.subtitle {
-            font-size: 1.1rem;
-            color: #e0e0e0;
-        }
-
-        /* Main Layout */
-        .container {
-            max-width: 1000px;
-            margin: -30px auto 0;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
+    <title>Weazel News | Bewerbung als Reporter - Jeff Jeremain</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        weazelRed: '#d32f2f',
+                        weazelDarkRed: '#8e0000',
+                        weazelBlue: '#0d1b3e',
+                        weazelNavy: '#080d1e',
+                        weazelAccent: '#ff1744',
+                        weazelSilver: '#e0e6ed',
+                        discordBg: '#5865F2',
+                        discordHover: '#4752C4'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        condensed: ['Roboto Condensed', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'ticker': 'ticker 32s linear infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        ticker: {
+                            '0%': { transform: 'translateX(100%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(211, 47, 47, 0.4)' },
+                            '100%': { boxShadow: '0 0 35px rgba(211, 47, 47, 0.8)' },
+                        }
+                    }
+                }
             }
         }
+    </script>
 
-        /* Cards */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
-            border-top: 4px solid var(--primary-red);
+    <style>
+        /* Custom Newsroom Styles & Glassmorphism */
+        body {
+            background-color: #060913;
+            color: #f1f5f9;
+            overflow-x: hidden;
         }
 
-        .card-title {
-            font-size: 1.3rem;
-            color: var(--primary-red);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
+        /* Scanline Overlay Effect */
+        .scanlines {
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.25) 50%
+            ), linear-gradient(
+                90deg,
+                rgba(255, 0, 0, 0.03),
+                rgba(0, 255, 0, 0.01),
+                rgba(0, 0, 255, 0.03)
+            );
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
         }
 
-        /* Profile & ID Section */
-        .id-card-container {
-            text-align: center;
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(13, 27, 62, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 3px solid #d32f2f;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
         }
 
-        .id-image {
-            width: 100%;
-            max-width: 320px;
-            border-radius: 10px;
-            border: 2px solid #333;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
+        .glass-card:hover {
+            border-color: rgba(211, 47, 47, 0.6);
         }
 
-        .id-image:hover {
-            transform: scale(1.02);
+        /* 3D Tilt Card Container */
+        .tilt-container {
+            perspective: 1000px;
+        }
+        .tilt-card {
+            transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+            transform-style: preserve-3d;
         }
 
-        .info-list {
-            list-style: none;
-            margin-top: 15px;
-            text-align: left;
+        /* Animated Progress Bar Glow */
+        .progress-glow {
+            box-shadow: 0 0 10px rgba(211, 47, 47, 0.6);
         }
 
-        .info-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #2a2a2a;
-            display: flex;
-            justify-content: space-between;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .info-list li span.label {
-            color: var(--text-muted);
+        ::-webkit-scrollbar-track {
+            background: #080d1e;
         }
-
-        .info-list li span.value {
-            font-weight: bold;
+        ::-webkit-scrollbar-thumb {
+            background: #d32f2f;
+            border-radius: 4px;
         }
-
-        /* Skills & Content */
-        .skill-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .skill-box {
-            background-color: #252525;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 3px solid var(--accent-gold);
-        }
-
-        .skill-box h4 {
-            color: var(--text-light);
-            margin-bottom: 5px;
-        }
-
-        .skill-box p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .motto {
-            font-style: italic;
-            background: #252525;
-            padding: 15px;
-            border-left: 4px solid var(--primary-red);
-            border-radius: 0 8px 8px 0;
-            margin: 15px 0;
-        }
-
-        /* Requirements Checklist */
-        .check-list {
-            list-style: none;
-        }
-
-        .check-list li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .check-list i {
-            color: #4caf50;
-            margin-top: 4px;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff1744;
         }
     </style>
 </head>
-<body>
+<body class="relative min-h-screen font-sans antialiased selection:bg-weazelRed selection:text-white">
 
-    <header>
-        <div class="header-content">
-            <span class="badge"><i class="fa-solid fa-newspaper"></i> Offizielle Bewerbung</span>
-            <h1>Jeff Jeremain</h1>
-            <p class="subtitle">Bewerbung um eine Anstellung als Reporter bei Weazel News</p>
+    <!-- Visual Scanlines Overlay Effect -->
+    <div id="scanlineOverlay" class="scanlines fixed inset-0 z-40 opacity-40 transition-opacity duration-300 pointer-events-none"></div>
+
+    <!-- Live Canvas Particle Background -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-30"></canvas>
+
+    <!-- MAIN HEADER / BANNER SECTION -->
+    <header class="relative z-10 border-b-2 border-weazelRed shadow-2xl bg-weazelNavy overflow-hidden">
+        
+        <!-- Top Status Bar -->
+        <div class="bg-black/80 px-4 py-1.5 text-xs text-gray-300 border-b border-white/10 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-weazelRed text-white font-bold text-[10px] tracking-widest uppercase animate-pulse">
+                    <span class="w-2 h-2 rounded-full bg-white animate-ping"></span> LIVE STUDIO
+                </span>
+                <span class="hidden sm:inline text-gray-400">STAAT RETRO BROADCASTING NETWORK</span>
+                <span class="text-weazelRed font-bold">• FREQ 99.4 MHz</span>
+            </div>
+            
+            <div class="flex items-center gap-4 text-[11px]">
+                <button onclick="toggleScanlines()" class="hover:text-white transition flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded border border-white/10">
+                    <i class="fa-solid fa-tv text-weazelRed"></i> <span id="scanlineStatus">Scanlines: AN</span>
+                </button>
+                <div class="font-mono text-gray-200" id="liveClock">00:00:00 RETRO-ZEIT</div>
+            </div>
         </div>
+
+        <!-- Main Weazel Header Visual Banner -->
+        <div class="relative max-w-7xl mx-auto px-4 py-8 sm:py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <!-- Animated Background Glow Gradients -->
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-weazelBlue/60 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-weazelRed/30 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Header Left / Weazel Brand Banner -->
+            <div class="relative z-10 w-full md:w-auto text-center md:text-left">
+                <!-- Replica Weazel Banner Structure -->
+                <div class="inline-flex flex-col sm:flex-row items-stretch shadow-2xl rounded-md overflow-hidden border border-white/10">
+                    
+                    <!-- Left Blue Section -->
+                    <div class="bg-gradient-to-r from-[#060e22] to-[#0d1b3e] px-6 py-4 flex items-center justify-center border-r-2 border-weazelRed/50">
+                        <div class="text-center sm:text-left">
+                            <div class="text-2xl sm:text-3xl font-black italic tracking-tighter text-white leading-none">
+                                WEAZEL
+                            </div>
+                            <div class="bg-weazelRed text-white text-xs font-bold px-2 py-0.5 tracking-widest text-center mt-1 uppercase">
+                                NEWS
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Red Section with Angled Divider -->
+                    <div class="bg-gradient-to-r from-weazelRed via-[#b71c1c] to-[#8e0000] px-8 py-4 flex items-center justify-center relative shadow-inner">
+                        <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-white uppercase tracking-wider text-shadow-lg drop-shadow-md">
+                            BEWERBUNGEN
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="mt-3 flex items-center justify-center md:justify-start gap-2 text-sm text-gray-300 font-medium">
+                    <span class="text-weazelRed font-bold"><i class="fa-solid fa-microphone-lines"></i> CANDIDATE PORTFOLIO</span>
+                    <span>|</span>
+                    <span class="text-gray-300">POSITION: REPORTER / JOURNALIST</span>
+                </div>
+            </div>
+
+            <!-- Candidate Title Badge -->
+            <div class="relative z-10 text-center md:text-right">
+                <div class="inline-block bg-weazelNavy/80 backdrop-blur-md p-4 rounded-xl border border-weazelRed/30 shadow-xl">
+                    <span class="text-xs uppercase font-bold tracking-widest text-weazelRed block mb-1">
+                        <i class="fa-solid fa-user-check mr-1"></i> Offizielle Bewerbung
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white tracking-wide">
+                        JEFF JEREMAIN
+                    </h2>
+                    <p class="text-xs text-gray-400 mt-1">
+                        Visum Stufe 30 <span class="text-weazelRed">•</span> Ausweis-ID: RR#62863358
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
     </header>
 
-    <div class="container">
-        <div class="grid">
+    <!-- CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-8 relative z-10 pb-28">
+
+        <!-- Top Quick Navigation / Action Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8 bg-weazelNavy/90 border border-white/10 p-4 rounded-xl shadow-lg">
+            <div class="flex items-center gap-3">
+                <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                <span class="text-sm font-semibold text-gray-200">Bewerber Status: <span class="text-green-400 font-bold">Einsatzbereit in Retro</span></span>
+            </div>
             
-            <!-- Linke Spalte: Perso & Kontaktdaten -->
-            <div class="sidebar">
-                <div class="card id-card-container">
-                    <div class="card-title">
-                        <i class="fa-solid fa-address-card"></i> Personalausweis
+            <div class="flex flex-wrap items-center gap-3">
+                <button onclick="copyPhone()" class="px-4 py-2 bg-white/10 hover:bg-weazelRed text-white text-xs font-bold uppercase rounded-lg transition duration-200 flex items-center gap-2 border border-white/10">
+                    <i class="fa-solid fa-phone"></i> Telefon: 6029103965
+                </button>
+                <a href="https://discord.com/users/811982593158676551" target="_blank" class="px-4 py-2 bg-discordBg hover:bg-discordHover text-white text-xs font-bold uppercase rounded-lg shadow-lg transition duration-200 flex items-center gap-2">
+                    <i class="fa-brands fa-discord"></i> Discord DM Schreiben
+                </a>
+                <a href="https://discord.com/channels/1503394137280610466/1565385039947239427" target="_blank" class="px-4 py-2 bg-weazelRed hover:bg-red-600 text-white text-xs font-bold uppercase rounded-lg shadow-lg hover:shadow-red-900/50 transition duration-200 flex items-center gap-2">
+                    <i class="fa-solid fa-ticket"></i> Bewerbungsticket Öffnen
+                </a>
+            </div>
+        </div>
+
+        <!-- MAIN GRID LAYOUT -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- LEFT COLUMN: Personalausweis ID & Quick Stats (4 cols) -->
+            <div class="lg:col-span-4 space-y-6">
+
+                <!-- Interactive 3D Personalausweis Card -->
+                <div class="glass-card p-5 rounded-2xl relative group overflow-hidden">
+                    <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
+                        <h3 class="font-bold text-lg text-white flex items-center gap-2">
+                            <i class="fa-solid fa-address-card text-weazelRed"></i> Personalausweis
+                        </h3>
+                        <span class="text-[10px] bg-weazelRed/20 text-weazelRed border border-weazelRed/30 px-2 py-0.5 rounded font-mono">STAAT RETRO</span>
                     </div>
-                    <!-- Hier wird das Bild vom Personalausweis geladen -->
-                    <img src="perso.png" alt="Personalausweis Jeff Jeremain" class="id-image">
-                    
-                    <ul class="info-list">
-                        <li><span class="label">Name:</span> <span class="value">Jeff Jeremain</span></li>
-                        <li><span class="label">Alter:</span> <span class="value">36 Jahre</span></li>
-                        <li><span class="label">Visumstufe:</span> <span class="value">30</span></li>
-                        <li><span class="label">Ausweis-Nr.:</span> <span class="value">RR#62863358</span></li>
-                        <li><span class="label">Telefon:</span> <span class="value">6029103965</span></li>
-                    </ul>
+
+                    <!-- 3D Tilt Wrapper for Personalausweis Image -->
+                    <div class="tilt-container cursor-pointer" onclick="zoomIDCard()">
+                        <div id="idTiltCard" class="tilt-card relative rounded-xl overflow-hidden shadow-2xl border border-white/20 group">
+                            <!-- Personalausweis Image -->
+                            <img id="persoImg" src="perso.png" onerror="this.onerror=null; this.src='https://placehold.co/600x380/0d1b3e/ffffff?text=Personalausweis+Jeff+Jeremain';" alt="Personalausweis Jeff Jeremain" class="w-full h-auto object-cover rounded-xl transform group-hover:scale-105 transition duration-300">
+                            
+                            <!-- Hover Overlay Prompt -->
+                            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center flex-col gap-2">
+                                <i class="fa-solid fa-magnifying-glass-plus text-3xl text-weazelRed"></i>
+                                <span class="text-xs font-bold tracking-wider uppercase text-white">Vergrößern</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ausweis Details Grid -->
+                    <div class="mt-5 space-y-2.5 text-xs">
+                        <div class="flex justify-between py-1.5 border-b border-white/5">
+                            <span class="text-gray-400">Nachname:</span>
+                            <span class="font-bold text-white tracking-wide">JEREMAIN</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-white/5">
+                            <span class="text-gray-400">Vorname:</span>
+                            <span class="font-bold text-white tracking-wide">JEFF</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-white/5">
+                            <span class="text-gray-400">Geburtsdatum:</span>
+                            <span class="font-semibold text-gray-200">14.02.1990 (36 Jahre)</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-white/5">
+                            <span class="text-gray-400">Visumstufe:</span>
+                            <span class="font-bold text-weazelRed bg-weazelRed/10 px-2 py-0.5 rounded">30</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-white/5">
+                            <span class="text-gray-400">Ausweisnummer:</span>
+                            <span class="font-mono text-gray-300">RR#62863358</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-white/5">
+                            <span class="text-gray-400">Staatsangehörigkeit:</span>
+                            <span class="font-semibold text-gray-200 flex items-center gap-1.5">
+                                <span class="inline-block w-3 h-2 bg-red-600 rounded-sm"></span> Türkei
+                            </span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-white/5">
+                            <span class="text-gray-400">Größe / Geschlecht:</span>
+                            <span class="font-semibold text-gray-200">186 CM / M</span>
+                        </div>
+                        <div class="flex justify-between py-1.5">
+                            <span class="text-gray-400">Telefonnummer:</span>
+                            <span class="font-mono font-bold text-green-400">6029103965</span>
+                        </div>
+                    </div>
+
+                    <!-- Direct Contact Buttons Section -->
+                    <div class="mt-4 pt-3 border-t border-white/10 space-y-2">
+                        <button onclick="copyPhone()" class="w-full py-2 bg-white/5 hover:bg-weazelRed/20 text-weazelRed hover:text-white border border-weazelRed/30 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-copy"></i> Telefonnummer Kopieren
+                        </button>
+                        <a href="https://discord.com/users/811982593158676551" target="_blank" class="w-full py-2 bg-discordBg hover:bg-discordHover text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 shadow">
+                            <i class="fa-brands fa-discord"></i> Discord Profil / DM (ID: 811982593158676551)
+                        </a>
+                        <a href="https://discord.com/channels/1503394137280610466/1565385039947239427" target="_blank" class="w-full py-2 bg-weazelRed hover:bg-red-600 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 shadow">
+                            <i class="fa-solid fa-ticket"></i> Offenes Bewerbungsticket
+                        </a>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fa-solid fa-headset"></i> Technische Ausstattung
+                <!-- Hardware & Audio Quality Check -->
+                <div class="glass-card p-5 rounded-2xl">
+                    <h3 class="font-bold text-lg text-white mb-4 flex items-center gap-2 border-b border-white/10 pb-3">
+                        <i class="fa-solid fa-headset text-weazelRed"></i> Broadcast Hardware
+                    </h3>
+
+                    <div class="space-y-3">
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5 flex items-start gap-3">
+                            <div class="p-2 bg-green-500/20 text-green-400 rounded-lg">
+                                <i class="fa-solid fa-microphone text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-white">Studio Mikrofon Qualität</h4>
+                                <p class="text-[11px] text-gray-400 mt-0.5">Rauschfrei, glasklarer Ton für Live-Interviews & Gefahrenberichte vor Ort in Retro.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5 flex items-start gap-3">
+                            <div class="p-2 bg-blue-500/20 text-blue-400 rounded-lg">
+                                <i class="fa-solid fa-wifi text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-white">Aktivität im Stadtleben Retro</h4>
+                                <p class="text-[11px] text-gray-400 mt-0.5">Tägliche Erreichbarkeit & schnelle Reaktionszeit bei Eilmeldungen.</p>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="check-list">
-                        <li><i class="fa-solid fa-circle-check"></i> <span>Gute Mikrofon-Qualität für saubere Interviews und Audioaufnahmen vorhanden.</span></li>
-                        <li><i class="fa-solid fa-circle-check"></i> <span>Hohe Aktivität & Präsenz im Stadtleben.</span></li>
-                    </ul>
                 </div>
+
             </div>
 
-            <!-- Rechte Spalte: Anschreiben & Qualifikationen -->
-            <div class="main-content">
-                
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fa-solid fa-pen-nib"></i> Über mich & Motivation
-                    </div>
-                    <p>Sehr geehrtes Weazel News Team,</p>
-                    <p style="margin-top: 10px;">
-                        mit großer Begeisterung Verfolge ich die Berichterstattung und Events im Stadtleben. Als engagierter Bürger mit Visumstufe 30 bringt mich der Wunsch angetrieben, Geschichten zu erzählen, Bürger zu informieren und aktuelle Geschehnisse hautnah und sauber aufzubereiten.
-                    </p>
-                    
-                    <div class="motto">
-                        "Medienarbeit bedeutet für mich nicht nur Nachrichten zu verbreiten, sondern das Stadtleben aktiv mitzugestalten und den Bürgern eine Stimme zu geben."
+            <!-- RIGHT COLUMN: Motivation, Interactive Skills, Article Demo, Requirements (8 cols) -->
+            <div class="lg:col-span-8 space-y-6">
+
+                <!-- MOTIVATION & OVERVIEW -->
+                <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="absolute -right-12 -bottom-12 opacity-5 pointer-events-none">
+                        <i class="fa-solid fa-bullhorn text-9xl text-white"></i>
                     </div>
 
-                    <p>
-                        Egal ob spannende Reportagen, spontane Interviews vor Ort oder die Ankündigung großer Events – ich zeichne mich durch mein freundliches, professionelles Auftreten sowie meine Zuverlässigkeit und Teamfähigkeit aus.
+                    <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
+                        <h3 class="font-bold text-xl text-white flex items-center gap-2">
+                            <i class="fa-solid fa-pen-nib text-weazelRed"></i> Anschreiben & Reporter-Vision
+                        </h3>
+                        <span class="text-xs text-weazelRed font-mono font-bold uppercase tracking-wider">Bewerber: Jeff Jeremain</span>
+                    </div>
+
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Sehr geehrtes Weazel News Team,
+                    </p>
+                    <p class="text-sm text-gray-300 leading-relaxed mt-3">
+                        mit großer Begeisterung verfolge ich das tägliche Geschehen im Staat Retro. Als aktiver Bürger mit Visumstufe 30 strebe ich danach, die Berichterstattung von Weazel News durch investigative Recherchen, packende Eilmeldungen und sachliche Bürgerinformationen zu verstärken.
+                    </p>
+
+                    <!-- Quote Box -->
+                    <div class="my-5 p-4 bg-gradient-to-r from-weazelBlue to-weazelNavy border-l-4 border-weazelRed rounded-r-xl shadow-md">
+                        <p class="text-sm italic text-gray-200">
+                            "Guter Journalismus in Retro bedeutet für mich, auch in Krisenmomenten wie der aktuellen Zombie-Welle oder bei mysteriösen Vorkommnissen kühlen Kopf zu bewahren, Fakten blitzschnell zu prüfen und die Bürger zuverlässig zu informieren."
+                        </p>
+                    </div>
+
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Ob spontane Krisenberichte, Interviews mit den Behörden von Retro oder Reportagen bei städtischen Events – ich bringe die nötige Ruhe, Wortgewandtheit und Kommunikationsstärke mit, um das Team von Weazel News optimal zu ergänzen.
                     </p>
                 </div>
 
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fa-solid fa-star"></i> Stärken & Fähigkeiten
+                <!-- INTERACTIVE SKILLS & COMPETENCIES -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="font-bold text-xl text-white mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-weazelRed"></i> Journalistische Kernkompetenzen
+                    </h3>
+                    <p class="text-xs text-gray-400 mb-6">Klicken Sie auf eine Kompetenz für Detail-Einblicke.</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+                        <!-- Skill Item 1 -->
+                        <div onclick="showSkillDetail('Krisenberichterstattung & Mut', 'Keine Scheu vor gefährlichen Lagen in Retro – ob Zombie-Ausbrüche oder Ausnahmezustand. Sicherheit der Bürger durch Aufklärung hat Vorrang.')" class="p-4 bg-black/40 hover:bg-weazelBlue/50 border border-white/5 hover:border-weazelRed/50 rounded-xl cursor-pointer transition duration-200 group">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-bold text-white group-hover:text-weazelRed transition">
+                                    <i class="fa-solid fa-shield-halved mr-2 text-weazelRed"></i> Krisen-Journalismus
+                                </span>
+                                <span class="text-xs font-mono text-gray-400">96%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-gradient-to-r from-red-600 to-weazelRed h-full rounded-full progress-glow" style="width: 96%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill Item 2 -->
+                        <div onclick="showSkillDetail('Rechtschreibung & Artikelbau', 'Stilsicheres Deutsch, fehlerfreie Grammatik und die Fähigkeit, komplexe Sachverhalte in Retro knackig und verständlich auf den Punkt zu bringen.')" class="p-4 bg-black/40 hover:bg-weazelBlue/50 border border-white/5 hover:border-weazelRed/50 rounded-xl cursor-pointer transition duration-200 group">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-bold text-white group-hover:text-weazelRed transition">
+                                    <i class="fa-solid fa-newspaper mr-2 text-weazelRed"></i> Artikel & Grammatik
+                                </span>
+                                <span class="text-xs font-mono text-gray-400">98%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-gradient-to-r from-red-600 to-weazelRed h-full rounded-full progress-glow" style="width: 98%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill Item 3 -->
+                        <div onclick="showSkillDetail('Schnelle Informationsverarbeitung', 'Fähigkeit, bei chaotischen Ereignissen in den Straßen von Retro blitzschnell Fakten zu sammeln, zu verifizieren und als Eilmeldung aufzubereiten.')" class="p-4 bg-black/40 hover:bg-weazelBlue/50 border border-white/5 hover:border-weazelRed/50 rounded-xl cursor-pointer transition duration-200 group">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-bold text-white group-hover:text-weazelRed transition">
+                                    <i class="fa-solid fa-bolt mr-2 text-weazelRed"></i> Blitz-Eilmeldungen
+                                </span>
+                                <span class="text-xs font-mono text-gray-400">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-gradient-to-r from-red-600 to-weazelRed h-full rounded-full progress-glow" style="width: 92%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill Item 4 -->
+                        <div onclick="showSkillDetail('Teamgeist & Zuverlässigkeit', 'Pünktlichkeit bei Terminen, vertrauensvolle Zusammenarbeit im Newsroom und hohe Lernbereitschaft.')" class="p-4 bg-black/40 hover:bg-weazelBlue/50 border border-white/5 hover:border-weazelRed/50 rounded-xl cursor-pointer transition duration-200 group">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-bold text-white group-hover:text-weazelRed transition">
+                                    <i class="fa-solid fa-users mr-2 text-weazelRed"></i> Teamfähigkeit
+                                </span>
+                                <span class="text-xs font-mono text-gray-400">100%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-gradient-to-r from-red-600 to-weazelRed h-full rounded-full progress-glow" style="width: 100%"></div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="skill-grid">
-                        <div class="skill-box">
-                            <h4><i class="fa-solid fa-microphone"></i> Kommunikation</h4>
-                            <p>Keine Scheu vor öffentlichen Auftritten, spontanen Interviews oder Gesprächen mit Organisationen.</p>
+                </div>
+
+                <!-- DEMO NEWS ARTICLE SIMULATOR -->
+                <div id="articleDemo" class="glass-card p-6 rounded-2xl relative">
+                    <div class="flex flex-wrap justify-between items-center mb-4 border-b border-white/10 pb-3 gap-2">
+                        <div>
+                            <span class="text-[10px] bg-weazelRed text-white px-2 py-0.5 rounded font-bold uppercase tracking-widest">Arbeitsproben / Eilmeldungen</span>
+                            <h3 class="font-bold text-xl text-white mt-1 flex items-center gap-2">
+                                <i class="fa-solid fa-file-signature text-weazelRed"></i> Proben: Ausgaben aus Retro
+                            </h3>
                         </div>
-                        <div class="skill-box">
-                            <h4><i class="fa-solid fa-file-pen"></i> Ausdrucksweise</h4>
-                            <p>Sicheres Schreiben, gute Rechtschreibung und die Fähigkeit, Infos schnell und sauber zu strukturieren.</p>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button onclick="changeArticle('zombie')" id="btnArticleZombie" class="px-3 py-1 bg-weazelRed text-white text-xs font-bold rounded shadow transition flex items-center gap-1">
+                                <i class="fa-solid fa-biohazard"></i> Zombie-Welle
+                            </button>
+                            <button onclick="changeArticle('clown')" id="btnArticleClown" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-bold rounded transition flex items-center gap-1">
+                                <i class="fa-solid fa-mask"></i> Horrorclowns
+                            </button>
+                            <button onclick="changeArticle('event')" id="btnArticleEvent" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-bold rounded transition flex items-center gap-1">
+                                <i class="fa-solid fa-calendar"></i> Stadt-Event
+                            </button>
                         </div>
-                        <div class="skill-box">
-                            <h4><i class="fa-solid fa-lightbulb"></i> Kreativität</h4>
-                            <p>Ideenreich bei der Erstellung von Berichten, Beiträgen und der Begleitung von Stadt-Events.</p>
+                    </div>
+
+                    <!-- Article Simulator Box -->
+                    <div class="bg-black/60 border border-white/10 p-5 rounded-xl space-y-3">
+                        <div class="flex items-center justify-between text-xs text-gray-400 border-b border-white/10 pb-2">
+                            <span id="articleCategory" class="text-weazelRed font-bold uppercase"><i class="fa-solid fa-biohazard mr-1"></i> EILMELDUNG / AKUTE GEFAHR</span>
+                            <span id="articleDate" class="font-mono">RETRO NEWSROOM</span>
                         </div>
-                        <div class="skill-box">
-                            <h4><i class="fa-solid fa-users"></i> Teamgeist</h4>
-                            <p>Zuverlässig, motiviert und stets bereit, Neues zu lernen und das Team bestmöglich zu unterstützen.</p>
+
+                        <h4 id="articleTitle" class="text-lg font-bold text-white leading-snug">
+                            Mysteriöse Zombie-Welle rollt durch Retro: Behörden verhängen Ausnahmezustand!
+                        </h4>
+
+                        <p id="articleBody" class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                            Ein unheimlicher Vorfall erschüttert aktuell die Straßen von Retro: In den Abendstunden wurden an mehreren Orten aggressiv agierende Gestalten gesichtet, die Anzeichen einer unheimlichen Infektion aufweisen. Sicherheitskräfte riegeln betroffene Stadtteile ab. Weazel News berichtet direkt aus dem Krisenzentrum – Bürgerinnen und Bürger werden dringend aufgefordert, Türen geschlossen zu halten und Ruhestörung sofort zu melden!
+                        </p>
+
+                        <div class="pt-3 border-t border-white/10 flex justify-between items-center text-xs">
+                            <span class="text-gray-400">Reporter vor Ort: <strong class="text-white">Jeff Jeremain</strong></span>
+                            <span class="text-green-400 font-mono"><i class="fa-solid fa-check-circle"></i> Live Verifiziert</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fa-solid fa-clipboard-check"></i> Erfüllte Voraussetzungen
+                <!-- REQUIREMENTS CHECKLIST -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="font-bold text-xl text-white mb-4 flex items-center gap-2 border-b border-white/10 pb-3">
+                        <i class="fa-solid fa-list-check text-weazelRed"></i> Erfüllung der Weazel News Kriterien
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        
+                        <div class="flex items-start gap-3 p-3 bg-black/30 rounded-xl border border-white/5">
+                            <i class="fa-solid fa-circle-check text-green-400 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="text-white block">Gute Aktivität im Stadtleben Retro</strong>
+                                <span class="text-gray-400">Regelmäßige Präsenz im Dienst.</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-3 bg-black/30 rounded-xl border border-white/5">
+                            <i class="fa-solid fa-circle-check text-green-400 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="text-white block">Zuverlässigkeit & Teamfähigkeit</strong>
+                                <span class="text-gray-400">Pünktlich, strukturiert, verlässlich.</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-3 bg-black/30 rounded-xl border border-white/5">
+                            <i class="fa-solid fa-circle-check text-green-400 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="text-white block">Gute Mikrofon-Qualität</strong>
+                                <span class="text-gray-400">Glasklarer Sound für Funk & Berichte.</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-3 bg-black/30 rounded-xl border border-white/5">
+                            <i class="fa-solid fa-circle-check text-green-400 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="text-white block">Sicheres Schreiben & Ausdruck</strong>
+                                <span class="text-gray-400">Fehlerfreie Berichte & schnelle Aufbereitung.</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-3 bg-black/30 rounded-xl border border-white/5">
+                            <i class="fa-solid fa-circle-check text-green-400 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="text-white block">Keine Scheu vor Interviews</strong>
+                                <span class="text-gray-400">Sicheres Auftreten vor Bürger/innen & Organisationen.</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-3 bg-black/30 rounded-xl border border-white/5">
+                            <i class="fa-solid fa-circle-check text-green-400 text-base mt-0.5"></i>
+                            <div>
+                                <strong class="text-white block">Motivation & Lernbereitschaft</strong>
+                                <span class="text-gray-400">Bereit für jede journalistische Herausforderung.</span>
+                            </div>
+                        </div>
+
                     </div>
-                    <ul class="check-list">
-                        <li><i class="fa-solid fa-check"></i> <span>Aktivität im Stadtleben & Hohe Einsatzbereitschaft</span></li>
-                        <li><i class="fa-solid fa-check"></i> <span>Freundliches & professionelles Auftreten gegenüber Bürgern</span></li>
-                        <li><i class="fa-solid fa-check"></i> <span>Gute Rechtschreibung & lückenlose Aufbereitung von Berichten</span></li>
-                        <li><i class="fa-solid fa-check"></i> <span>Hohe Motivation & Lernbereitschaft</span></li>
-                    </ul>
                 </div>
 
             </div>
 
+        </div>
+
+    </main>
+
+    <!-- BOTTOM FIXED LIVE TICKER BAR -->
+    <div class="fixed bottom-0 left-0 right-0 z-50 bg-black border-t-2 border-weazelRed shadow-2xl flex items-center h-12 overflow-hidden">
+        <!-- Ticker Tag -->
+        <div class="bg-weazelRed text-white font-black px-4 py-full h-full flex items-center gap-2 z-10 shadow-lg shrink-0 uppercase tracking-wider text-xs sm:text-sm">
+            <span class="w-2.5 h-2.5 bg-white rounded-full animate-ping"></span> EILMELDUNG
+        </div>
+
+        <!-- Animated Ticker Text -->
+        <div class="overflow-hidden whitespace-nowrap w-full">
+            <div class="inline-block animate-ticker text-xs sm:text-sm text-gray-200 font-medium">
+                +++ <strong class="text-weazelRed">WARNUNG RETRO:</strong> Zombie-Welle erschüttert die Stadt – Bürger/innen zur Vorsicht aufgerufen! +++ <strong class="text-weazelRed">GEFAHR:</strong> Angriffe auf Bürger/innen durch verkleidete Horrorclowns gemeldet! +++ <strong class="text-white">BEWERBUNGINGANG:</strong> Jeff Jeremain bewirbt sich als Reporter bei Weazel News +++ <strong class="text-white">KONTAKT:</strong> Tel. 6029103965 +++ <strong class="text-weazelRed">VISUMSTUFE:</strong> 30 +++ <strong class="text-white">DISCORD ID:</strong> 811982593158676551 +++ <strong class="text-white">STATUS:</strong> Bereit für Bewerbungsgespräch & Probearbeiten in Retro +++
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; Bewerbung von Jeff Jeremain | Weazel News – San Andreas</p>
-    </footer>
+    <!-- MODAL: Image Zoom for Personalausweis -->
+    <div id="imageModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="relative max-w-3xl w-full">
+            <button onclick="closeModal('imageModal')" class="absolute -top-12 right-0 text-white hover:text-weazelRed text-2xl font-bold transition">
+                <i class="fa-solid fa-xmark"></i> Schließen
+            </button>
+            <img id="modalImg" src="perso.png" onerror="this.onerror=null; this.src='https://placehold.co/600x380/0d1b3e/ffffff?text=Personalausweis+Jeff+Jeremain';" class="w-full h-auto rounded-xl border-2 border-weazelRed shadow-2xl">
+        </div>
+    </div>
 
+    <!-- MODAL: Skill Detail -->
+    <div id="skillModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full p-6 rounded-2xl relative border border-weazelRed shadow-2xl">
+            <h4 id="skillModalTitle" class="text-lg font-bold text-white mb-2 text-weazelRed">Detailansicht</h4>
+            <p id="skillModalDesc" class="text-sm text-gray-300 leading-relaxed mb-6">Detailinformationen...</p>
+            <button onclick="closeModal('skillModal')" class="w-full py-2 bg-weazelRed hover:bg-red-600 text-white text-xs font-bold uppercase rounded-lg transition">
+                Verstanden
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 right-5 z-50 bg-weazelRed text-white px-5 py-3 rounded-xl shadow-2xl border border-white/20 transform translate-x-72 opacity-0 transition-all duration-300 flex items-center gap-3 text-xs font-bold">
+        <i class="fa-solid fa-circle-check text-lg"></i>
+        <span id="toastMsg">Benachrichtigung</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Real-Time Clock
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('liveClock').textContent = `${hours}:${minutes}:${seconds} RETRO-ZEIT`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Canvas Background Particles Effect
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * -0.5 - 0.2;
+                this.color = Math.random() > 0.5 ? 'rgba(211, 47, 47, ' : 'rgba(13, 27, 62, ';
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.x < 0 || this.x > canvas.width) this.x = Math.random() * canvas.width;
+            }
+            draw() {
+                ctx.fillStyle = this.color + this.alpha + ')';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        // 3D Tilt Effect on Personalausweis Card
+        const tiltCard = document.getElementById('idTiltCard');
+        if (tiltCard) {
+            tiltCard.addEventListener('mousemove', (e) => {
+                const rect = tiltCard.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -12;
+                const rotateY = ((x - centerX) / centerX) * 12;
+                tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            tiltCard.addEventListener('mouseleave', () => {
+                tiltCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+        }
+
+        // Toggle Scanlines Effect
+        let scanlineState = true;
+        function toggleScanlines() {
+            scanlineState = !scanlineState;
+            const overlay = document.getElementById('scanlineOverlay');
+            const status = document.getElementById('scanlineStatus');
+            overlay.style.opacity = scanlineState ? '0.4' : '0';
+            status.textContent = scanlineState ? 'Scanlines: AN' : 'Scanlines: AUS';
+            showToast(scanlineState ? 'Scanlines aktiviert' : 'Scanlines deaktiviert');
+        }
+
+        // Copy Phone Number
+        function copyPhone() {
+            const tempInput = document.createElement('input');
+            tempInput.value = '6029103965';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast('Telefonnummer 6029103965 kopiert!');
+        }
+
+        // Article Simulator Switcher
+        function changeArticle(type) {
+            const title = document.getElementById('articleTitle');
+            const body = document.getElementById('articleBody');
+            const cat = document.getElementById('articleCategory');
+            
+            const btnZombie = document.getElementById('btnArticleZombie');
+            const btnClown = document.getElementById('btnArticleClown');
+            const btnEvent = document.getElementById('btnArticleEvent');
+
+            // Reset class styles
+            const activeStyle = 'px-3 py-1 bg-weazelRed text-white text-xs font-bold rounded shadow transition flex items-center gap-1';
+            const inactiveStyle = 'px-3 py-1 bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-bold rounded transition flex items-center gap-1';
+
+            btnZombie.className = inactiveStyle;
+            btnClown.className = inactiveStyle;
+            btnEvent.className = inactiveStyle;
+
+            if (type === 'zombie') {
+                cat.innerHTML = '<i class="fa-solid fa-biohazard mr-1"></i> EILMELDUNG / AKUTE GEFAHR';
+                title.textContent = 'Mysteriöse Zombie-Welle rollt durch Retro: Behörden verhängen Ausnahmezustand!';
+                body.textContent = 'Ein unheimlicher Vorfall erschüttert aktuell die Straßen von Retro: In den Abendstunden wurden an mehreren Orten aggressiv agierende Gestalten gesichtet, die Anzeichen einer unheimlichen Infektion aufweisen. Sicherheitskräfte riegeln betroffene Stadtteile ab. Weazel News berichtet direkt aus dem Krisenzentrum – Bürgerinnen und Bürger werden dringend aufgefordert, Türen geschlossen zu halten und Ruhestörung sofort zu melden!';
+                btnZombie.className = activeStyle;
+            } else if (type === 'clown') {
+                cat.innerHTML = '<i class="fa-solid fa-mask mr-1"></i> WARNUNG FOR BÜRGER/INNEN';
+                title.textContent = 'Überfälle in der Nacht: Angriffe auf Bürger/innen durch verkleidete Horrorclowns in Retro!';
+                body.textContent = 'Die Polizei im Staat Retro schlägt Alarm: In mehreren Wohngebieten mehren sich Berichte über maskierte Personen in Horrorclown-Kostümen, die Passanten auflauern und körperlich angreifen. Jeff Jeremain war für Weazel News vor Ort bei betroffenen Anwohnern. Die Behörden raten zur erhöhten Wachsamkeit bei Dunkelheit und bitten um sachdienliche Hinweise!';
+                btnClown.className = activeStyle;
+            } else {
+                cat.innerHTML = '<i class="fa-solid fa-calendar mr-1"></i> KULTUR & STADTLEBEN';
+                title.textContent = 'Großes Bürger-Event im Zentrum von Retro: Rekord-Beteiligung beim Jahresfest';
+                body.textContent = 'Gestern Abend verwandelte sich der zentrale Platz im Staat Retro in ein buntes Meer aus Musik, Kultur und Zusammenhalt. Hunderte Einwohner feierten gemeinsam bis tief in die Nacht. Neben kulinarischen Highlights stand vor allem das Gemeinschaftsgefühl im Mittelpunkt. Weazel News war hautnah dabei und fing die schönsten Momente ein.';
+                btnEvent.className = activeStyle;
+            }
+        }
+
+        // Modal Helpers
+        function zoomIDCard() {
+            document.getElementById('imageModal').classList.remove('hidden');
+        }
+
+        function showSkillDetail(title, desc) {
+            document.getElementById('skillModalTitle').textContent = title;
+            document.getElementById('skillModalDesc').textContent = desc;
+            document.getElementById('skillModal').classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Toast Helper
+        function showToast(text) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toastMsg');
+            msg.textContent = text;
+            toast.classList.remove('translate-x-72', 'opacity-0');
+            toast.classList.add('translate-x-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.add('translate-x-72', 'opacity-0');
+                toast.classList.remove('translate-x-0', 'opacity-100');
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
